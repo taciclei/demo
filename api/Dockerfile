@@ -36,6 +36,7 @@ RUN set -eux; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
 		pdo_pgsql \
+		pdo_mysql \
 		zip \
 	; \
 	pecl install \
@@ -93,9 +94,9 @@ WORKDIR /srv/api
 ARG APP_ENV=prod
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY composer.json composer.lock symfony.lock ./
+COPY composer.json symfony.lock ./
 RUN set -eux; \
-	composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest; \
+	composer install --prefer-dist --no-scripts --no-suggest; \
 	composer clear-cache
 
 COPY .env ./

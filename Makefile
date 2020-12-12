@@ -63,7 +63,7 @@ db-schema-validate: ## Validate the mapping files
 db-schema-drop: ## Executes (or dumps) the SQL needed to drop the current database schema
 	$(EXEC) $(CON) doctrine:schema:drop --force
 
-db-schema-update: ## Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata
+make db-schema-update: ## Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata
 	$(EXEC) $(CON) doctrine:schema:update --force
 
 db-fixtures: ## Reset the database fixtures
@@ -80,7 +80,7 @@ unit-tests-coverage: ## Run functional tests
 	$(EXEC) bin/phpunit --coverage-html public/coverage
 
 behat-tests: ## Run behat tests
-	$(EXEC) vendor/bin/behat
+	$(EXEC) vendor/bin/behat  --lang=fr
 
 ##
 ## Tools
@@ -143,24 +143,24 @@ bash: ## Access the api container via shell
 
 
 jwt: docker-files perm
-	-$(EXEC) mkdir -p config/jwt
-	-$(EXEC) php -r "require'vendor/autoload.php';file_put_contents('passphrase.txt',\Symfony\Component\Yaml\Yaml::parse(file_get_contents('config/packages/lexik_jwt_authentication.yaml'))['lexik_jwt_authentication']['pass_phrase']);"
-	-$(EXEC) openssl genpkey -out ./config/jwt/private.pem -aes256 -pass file:passphrase.txt -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-	-$(EXEC) openssl pkey -in ./config/jwt/private.pem -passin file:passphrase.txt -out config/jwt/public.pem -pubout
-	-$(EXEC) rm -f passphrase.txt
-	-$(EXEC) chown -R www-data:www-data ./config/jwt
+	-$(EXEC) mkdir -p api/config/jwt
+	-$(EXEC) php -r "require'api/vendor/autoload.php';file_put_contents('api/passphrase.txt',\Symfony\Component\Yaml\Yaml::parse(file_get_contents('api/config/packages/lexik_jwt_authentication.yaml'))['lexik_jwt_authentication']['pass_phrase']);"
+	-$(EXEC) openssl genpkey -out api/config/jwt/private.pem -aes256 -pass file:api/passphrase.txt -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+	-$(EXEC) openssl pkey -in api/config/jwt/private.pem -passin file:passphrase.txt -out api/config/jwt/public.pem -pubout
+	-$(EXEC) rm -f api/passphrase.txt
+	-$(EXEC) chown -R www-data:www-data api/config/jwt
 
 build: docker-files
-	-$(EXEC) rm -rf config/jwt/*
+	-$(EXEC) rm -rf api/config/jwt/*
 	-$(DC) build
 	-make jwt
-	-$(EXEC) chmod -R 777 ./var/*
+	-$(EXEC) chmod -R 777 api/var/*
 
 build-no-chache: docker-files
-	-$(EXEC) rm -rf config/jwt/*
+	-$(EXEC) rm -rf api/config/jwt/*
 	-$(DC) build --no-cache
 	-make jwt
-	-$(EXEC) chmod -R 777 ./var/*
+	-$(EXEC) chmod -R 777 api/var/*
 	-docker-compose up -d --force-recreate
 	-make db-drop
 	-make db-create
@@ -177,3 +177,6 @@ cs-fix-dry: docker-files vendor
 cs-fix:  ## Runs the CS fixer to fix the project coding style
 cs-fix: docker-files vendor
 	$(EXEC) vendor/bin/php-cs-fixer fix src -vvv --config=.php_cs --cache-file=.php_cs.cache
+.PHONY: docker-clean
+docker-clean:
+	@docker system prune --volumes

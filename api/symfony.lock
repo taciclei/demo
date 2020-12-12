@@ -25,6 +25,9 @@
     "behat/gherkin": {
         "version": "v4.6.2"
     },
+    "behat/mink": {
+        "version": "v1.8.1"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },
@@ -35,7 +38,7 @@
         "version": "0.9.1"
     },
     "composer/package-versions-deprecated": {
-        "version": "1.11.99"
+        "version": "1.11.99.1"
     },
     "composer/semver": {
         "version": "1.5.0"
@@ -139,6 +142,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "dvdoug/behat-code-coverage": {
+        "version": "v5.0.0"
+    },
     "ekino/phpstan-banned-code": {
         "version": "v0.3.1"
     },
@@ -147,9 +153,6 @@
     },
     "fig/link-util": {
         "version": "1.0.0"
-    },
-    "friends-of-behat/mink": {
-        "version": "v1.8.0"
     },
     "friends-of-behat/mink-browserkit-driver": {
         "version": "v1.4.0"
@@ -171,6 +174,9 @@
             "features/demo.feature",
             "tests/Behat/DemoContext.php"
         ]
+    },
+    "friends-of-behat/test-context": {
+        "version": "v1.2.0"
     },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
@@ -214,13 +220,16 @@
         "version": "5.2.8"
     },
     "laminas/laminas-code": {
-        "version": "3.4.1"
+        "version": "3.5.1"
     },
     "laminas/laminas-eventmanager": {
         "version": "3.3.0"
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "lcobucci/clock": {
+        "version": "2.0.0"
     },
     "lcobucci/jwt": {
         "version": "3.2.5"
@@ -587,7 +596,7 @@
         "version": "v4.2.4"
     },
     "symfony/proxy-manager-bridge": {
-        "version": "v5.1.8"
+        "version": "v5.1.9"
     },
     "symfony/redis-messenger": {
         "version": "v5.1.3"

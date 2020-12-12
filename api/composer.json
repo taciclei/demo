@@ -26,11 +26,13 @@
     },
     "require-dev": {
         "adamquaile/behat-command-runner-extension": "*@dev",
-        "behatch/contexts": "^3.3",
+        "behat/mink": "^1.8",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
-        "friends-of-behat/mink-extension": "^2.4",
-        "friends-of-behat/symfony-extension": "^2.0",
+        "friends-of-behat/symfony-extension": "^2.1",
+        "friends-of-behat/test-context": "^1.2",
+        "behatch/contexts": "^3.3",
+        "dvdoug/behat-code-coverage": "^5.0",
         "ekino/phpstan-banned-code": "^0.3.1",
         "friendsofphp/php-cs-fixer": "^2.16",
         "hautelook/alice-bundle": "^2.7",
@@ -71,8 +73,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -96,6 +97,8 @@
             "bin/phpunit"
         ],
         "tests": [
+            "@phpunit tests/Controller/LegacyApiControllerTest.php",
+            "@phpunit tests/Controller/SwaggerTest.php",
             "@phpunit tests/Entity/TopBooksTest.php",
             "@phpunit tests/TopBooksTest.php",
             "@phpunit tests/BooksTest.php",

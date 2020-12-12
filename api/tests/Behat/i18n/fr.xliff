@@ -1,0 +1,12 @@
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="global" source-language="en" target-language="fr" datatype="plaintext">
+        <header />
+        <body>
+            <!-- FeatureContext.php -->
+            <trans-unit id="i-set-basic-authentication333">
+                <source><![CDATA[I send a :method project request to :url where id is :node from last request]]></source>
+                <target><![CDATA[J'envoie une requete :method à :url où l'id est :node de la dernière requete]]></target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -12,6 +12,14 @@ default:
          - behatch:context:json
          - Behat\MinkExtension\Context\MinkContext
   extensions:
+      DVDoug\Behat\CodeCoverage\Extension:
+          filter:
+              include:
+                  directories:
+                      'src': ~
+          reports:
+              html:
+                  target: build/coverage-behat
       FriendsOfBehat\SymfonyExtension:
           bootstrap: tests/Behat/bootstrap.php
           kernel:
@@ -19,7 +27,7 @@ default:
               environment: test
               debug: ~
       Behat\MinkExtension:
-          base_url: "http://localhost:8080/"
+          base_url: "http://localhost/"
           sessions:
               default:
                   symfony: ~

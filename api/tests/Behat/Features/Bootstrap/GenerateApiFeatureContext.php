@@ -11,7 +11,7 @@ use Behatch\Json\JsonInspector;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class FeatureContext extends RestContext
+class GenerateApiFeatureContext extends RestContext
 {
     /**
      * @var JsonInspector
@@ -30,10 +30,13 @@ class FeatureContext extends RestContext
         $this->inspector = new JsonInspector('javascript');
     }
 
-
+    public static function getTranslationResources()
+    {
+        return glob(__DIR__ . '/../../i18n/*.xliff');
+    }
 
     /**
-     * @Then the JSON node :node should be greater than the number :number
+     * @Then Generate feature :url
      */
     public function theJsonNodeShouldBeGreaterThanTheNumber($node, $number)
     {
@@ -63,7 +66,6 @@ class FeatureContext extends RestContext
     public function gatherContexts(BeforeScenarioScope $scope)
     {
         $environment = $scope->getEnvironment();
-
         try {
             $this->restContext = $environment->getContext('Behatch\Context\RestContext');
         } catch (\Exception $e) {
@@ -120,24 +122,5 @@ class FeatureContext extends RestContext
     public function getCode($code)
     {
         return constant(Response::class . '::' . $code);
-    }
-
-    /**
-     * @When Generate feature files by swagger :url
-     */
-    public function generateFeatureFilesBySwagger($url, $body = null, $files = [])
-    {
-        $response = $this->request->send(
-            'GET',
-            $this->locatePath($url),
-            [],
-            $files,
-            $body !== null ? $body->getRaw() : null
-        );
-        //$this->getSession()
-        $content = $response->getSession()->getPage()->find('css', 'head script');
-        $json = new Json($content->getText());
-        var_dump($this );die('plop');
-        print_r($json);
     }
 }

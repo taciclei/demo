@@ -1,0 +1,3 @@
+Feature:
+  Scenario: Generate feature files by swagger
+    When Generate feature files by swagger "/"
