@@ -8,9 +8,14 @@
         "ext-json": "*",
         "ext-openssl": "*",
         "api-platform/api-pack": "^1.2",
+        "behat/mink": "^1.8",
         "csa/guzzle-bundle": "^3.2",
         "doctrine/doctrine-bundle": "^2.0 <2.1",
         "doctrine/doctrine-migrations-bundle": "^2.2",
+        "friends-of-behat/mink": "^1.8",
+        "friends-of-behat/mink-browserkit-driver": "^1.4",
+        "friends-of-behat/symfony-extension": "^2.1",
+        "friends-of-behat/test-context": "^1.2",
         "lexik/jwt-authentication-bundle": "^2.8",
         "ramsey/uuid-doctrine": "^1.6",
         "sensiolabs/security-checker": "^6.0",
@@ -26,11 +31,6 @@
     },
     "require-dev": {
         "adamquaile/behat-command-runner-extension": "*@dev",
-        "behat/mink": "^1.8",
-        "friends-of-behat/mink": "^1.8",
-        "friends-of-behat/mink-browserkit-driver": "^1.4",
-        "friends-of-behat/symfony-extension": "^2.1",
-        "friends-of-behat/test-context": "^1.2",
         "behatch/contexts": "^3.3",
         "dvdoug/behat-code-coverage": "^5.0",
         "ekino/phpstan-banned-code": "^0.3.1",
@@ -73,7 +73,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
